@@ -2,5 +2,5 @@
   <%= comment.user.name %> posted
   <%= simple_format comment.body %>
 
-  <%= render partial: "comments/form", locals: { commentable: @post, parent_id: comment.id } %>
+  <%= render partial: "comments/form", locals: { commentable: @post, parent_id: comment.id, class: 'd-none' } %>
 </div>
