@@ -2,6 +2,9 @@
   <%= comment.user.name %> posted
   <%= simple_format comment.body %>
 
-  <%= link_to 'Reply', '#' %>
-  <%= render partial: "comments/form", locals: { commentable: @post, parent_id: comment.id, class: 'd-none' } %>
+
+  <div data-controller='reply'>
+    <%= link_to 'Reply', '#', data: { action: 'click->reply#show' } %>
+    <%= render partial: "comments/form", locals: { commentable: @post, parent_id: comment.id, class: 'd-none', target: 'reply.form' } %>
+  </div>
 </div>
