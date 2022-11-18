@@ -16,8 +16,8 @@ export default class extends Controller {
   //   this.outputTarget.textContent = 'Hello, Stimulus!'
   // }
 
-  show(event) {
-    event.preventDefault
-    this.formTarget.classList.remove('d-none')
+  toggle(event) {
+    event.preventDefault()
+    this.formTarget.classList.toggle('d-none')
   }
 }
