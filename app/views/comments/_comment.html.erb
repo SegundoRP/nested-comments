@@ -5,6 +5,8 @@
 
   <div data-controller='reply'>
     <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } %>
-    <%= render partial: "comments/form", locals: { commentable: @post, parent_id: comment.id, class: 'd-none', target: 'reply.form' } %>
+    <%= render partial: "comments/form", locals: { commentable: comment.commentable, parent_id: comment.id, class: 'd-none', target: 'reply.form' } %>
   </div>
+
+  <%= render comment.comments %>
 </div>
