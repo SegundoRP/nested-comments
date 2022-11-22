@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :discussions
   resources :posts
 authenticate :user, lambda { |u| u.admin? } do
   mount Sidekiq::Web => '/sidekiq'
@@ -20,9 +19,9 @@ end
     resources :comments, module: :posts
   end
 
-  # resources :discussions do
-  #   resources :comments, module: :discussions
-  # end
+  resources :discussions do
+    resources :comments, module: :discussions
+  end
 
   root to: 'posts#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
