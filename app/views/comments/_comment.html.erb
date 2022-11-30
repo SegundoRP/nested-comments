@@ -8,10 +8,15 @@
   <div data-controller='reply'>
     <small>
       <%= nesting > max_nesting %>
-      <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } if nesting < max_nesting %>
+      <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } %>
       <%= link_to 'Delete', [comment.commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } if comment.user == current_user %>
     </small>
-    <%= render partial: "comments/form", locals: { commentable: comment.commentable, parent_id: comment.id, class: 'd-none', target: 'reply.form' } %>
+    <%= render partial: "comments/form", locals: {
+      commentable: comment.commentable,
+      parent_id: (nesting < max_nesting ? comment.id : comment.parent_id),
+      class: 'd-none',
+      target: 'reply.form'
+      } %>
   </div>
 
   <%= render comment.comments, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
