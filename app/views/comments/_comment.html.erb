@@ -1,3 +1,5 @@
+<% nesting = local_assigns.fetch(:nesting, 1) %>
+<% max_nesting = local_assigns[:max_nesting] %>
 <div class="border-left border-bottom border-top p-4 mb-4">
   <%= comment.user.name %> posted
   <%= simple_format comment.body %>
@@ -5,11 +7,12 @@
 
   <div data-controller='reply'>
     <small>
-      <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } %>
+      <%= nesting > max_nesting %>
+      <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } if nesting < max_nesting %>
       <%= link_to 'Delete', [comment.commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } if comment.user == current_user %>
     </small>
     <%= render partial: "comments/form", locals: { commentable: comment.commentable, parent_id: comment.id, class: 'd-none', target: 'reply.form' } %>
   </div>
 
-  <%= render comment.comments %>
+  <%= render comment.comments, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
 </div>

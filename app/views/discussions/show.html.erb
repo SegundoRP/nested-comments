@@ -19,5 +19,5 @@
 <h3>Comments</h3>
 <div id="comments">
   <%= render partial: "comments/form", locals: { commentable: @discussion } %>
-  <%= render @discussion.comments.where(parent_id: nil) %>
+  <%= render @discussion.comments.where(parent_id: nil), max_nesting: 5 %>
 </div>
