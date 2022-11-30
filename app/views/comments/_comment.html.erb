@@ -4,7 +4,10 @@
 
 
   <div data-controller='reply'>
-    <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } %>
+    <small>
+      <%= link_to 'Reply', '#', data: { action: 'click->reply#toggle' } %>
+      <%= link_to 'Delete', [comment.commentable, comment], method: :delete, data: { confirm: 'Are you sure?' } if comment.user == current_user %>
+    </small>
     <%= render partial: "comments/form", locals: { commentable: comment.commentable, parent_id: comment.id, class: 'd-none', target: 'reply.form' } %>
   </div>
 
