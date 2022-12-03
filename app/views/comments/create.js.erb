@@ -1,1 +1,11 @@
-'<%= j render partial: 'comments/comment', locals: { comment: @comment }, format: :html %>'
+<% if @comment.parent_id? %>
+  var comments = document.querySelector("#<%= dom_id(@comment.parent) %>_comments")
+<% else %>
+  var comments = document.querySelector("#comments")
+<% end %>
+
+comments.insertAdjacentHTML('beforeend', '<%= j render partial: 'comments/comment', locals: { comment: @comment }, format: :html %>')
+
+var form = comments.aprentElement.querySelector("form")
+form.reset()
+form.classList.add("d-none")
