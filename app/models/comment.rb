@@ -10,7 +10,11 @@ class Comment < ApplicationRecord
 
   # The alternative to below is  we could move all the children  to point to our parent instead
   def destroy
+    update(user: nil, body: nil)
+  end
 
+  def deleted?
+    user.nil?
   end
 
   # For only delete the selected comment and not all thread
