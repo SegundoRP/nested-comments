@@ -8,7 +8,7 @@ class Comment < ApplicationRecord
     Comment.where(commentable: commentable, parent_id: id)
   end
 
-  # The alternative to below is  we could move all the children  to point to our parent instead
+  # Alternatively to below is  we could move all the children  to point to our parent instead
   def destroy
     update(user: nil, body: nil)
   end
