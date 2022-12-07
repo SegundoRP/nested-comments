@@ -1,11 +1,11 @@
 <% nesting = local_assigns.fetch(:nesting, 1) %>
 <% max_nesting = local_assigns[:max_nesting] %>
-<div class="border-left border-bottom border-top p-4 mb-4">
+<%= tag.div id: dom_id(comment), class: 'border-left border-bottom border-top p-4 mb-4' do %>
   <%# <% if comment.deleted? %>
     <%# <strong>[deleted]</strong> posted
     <p>[deleted]</p> %>
   <%# <% else %>
-    <strong><%= comment.user.name %></strong> posted
+    <strong><%= comment.user.name %></strong> <%= link_to 'posted', url_for(comment: comment.id, anchor: dom_id(comment)) %>
     <%= simple_format comment.body %>
   <%# <% end %>
 
@@ -28,4 +28,4 @@
     <%= render comment.comments, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
     <%# where the js inserts %>
   <% end %>
-</div>
+<% end %>
