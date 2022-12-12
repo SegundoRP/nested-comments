@@ -28,7 +28,7 @@
   <%= tag.div id: "#{dom_id(comment)}_comments" do %>
     <% if continue_thread.present? && nesting >= continue_thread && comment.comments.any? %>
       <%= link_to 'Continue this thread', url_for(comment: comment.id, anchor: dom_id(comment)) %>
-    <% end %>
+    <% else %>
       <%= render comment.comments, continue_thread: continue_thread, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
       <%# where the js inserts %>
     <% end %>
