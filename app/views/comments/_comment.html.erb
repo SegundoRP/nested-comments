@@ -1,5 +1,6 @@
 <% nesting = local_assigns.fetch(:nesting, 1) %>
 <% max_nesting = local_assigns[:max_nesting] %>
+<% continue_thread = local_assigns[:continue_thread] %>
 <%= tag.div id: dom_id(comment), class: 'border-left border-bottom border-top p-4 mb-4' do %>
   <%# <% if comment.deleted? %>
     <%# <strong>[deleted]</strong> posted
@@ -25,7 +26,11 @@
   <%# comments %>
   <%# comment_44_comments %>
   <%= tag.div id: "#{dom_id(comment)}_comments" do %>
-    <%= render comment.comments, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
-    <%# where the js inserts %>
+    <% if nesting >= 10 && comment.comments.any? %>
+      <%= link_to 'Continue this thread', url_for(comment: comment.id, anchor: dom_id(comment)) %>
+    <% end %>
+      <%= render comment.comments, nesting: nesting + 1, max_nesting: local_assigns[:max_nesting] %>
+      <%# where the js inserts %>
+    <% end %>
   <% end %>
 <% end %>
