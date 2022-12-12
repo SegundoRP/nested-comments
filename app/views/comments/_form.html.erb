@@ -5,6 +5,7 @@
 
   <div class="form-group">
     <%= form.hidden_field :parent_id, value: local_assigns[:parent_id] %>
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit class: 'btn btn-primary', data: {disable_with: 'Espera'} %>
+    <%# EL disable es para que cuandop el request demore aparezca ese mensaje, es proveido por UJS %>
   </div>
 <% end %>
